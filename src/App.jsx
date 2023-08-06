@@ -12,6 +12,7 @@ const MyInput = React.forwardRef(({value, onChange}, _) => {
         <Button onClick={()=> onChange('A')}>A</Button>
         <Button onClick={()=> onChange('B')}>B</Button>
         <Button onClick={()=> onChange('C')}>C</Button>
+        <Button onClick={()=> onChange('D')}>D</Button>
     </HStack>
     </VStack>
   ) 
