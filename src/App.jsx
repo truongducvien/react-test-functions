@@ -2,8 +2,7 @@
 import "./App.css";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import MUIThemeProvider from "./components/MUI-theme/MUIThemeProvider";
-import { useState } from "react";
-import TextAreaInput from "./components/input-textarea";
+import { Loading } from "./components/framer-motion";
 
 function App() {
   const queryClient = new QueryClient();
@@ -11,7 +10,7 @@ function App() {
   return (
     <MUIThemeProvider>
       <QueryClientProvider client={queryClient}>
-        <TextAreaInput />
+        <Loading />
       </QueryClientProvider>
     </MUIThemeProvider>
   );
