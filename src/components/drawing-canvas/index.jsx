@@ -8,11 +8,12 @@ export default function DrawingCanvas() {
   const containerRef = useRef(null);
   const pannerRef = useRef(null);
 
-  const [mode, setMode] = useState(MODE.DEFAULT);
+  const [mode, setMode] = useState(MODE.PAN);
 
   const { placeCenter, handleMouseEnter, handleMouseDown } = usePanner(
     containerRef,
-    pannerRef
+    pannerRef,
+    mode === MODE.PAN
   );
 
   const modeBtnList = useMemo(
@@ -29,6 +30,12 @@ export default function DrawingCanvas() {
         isActive: mode === MODE.PAN,
         onClick: () => setMode(MODE.PAN),
       },
+      {
+        key: "center",
+        label: "Center",
+        isActive: mode === MODE.CENTER,
+        onClick: () => setMode(MODE.CENTER),
+      },
     ],
     [mode]
   );
@@ -36,6 +43,10 @@ export default function DrawingCanvas() {
   useEffect(() => {
     placeCenter();
   }, [containerRef, pannerRef, placeCenter]);
+
+  useEffect(() => {
+    if (mode === MODE.CENTER) placeCenter();
+  }, [mode, placeCenter]);
 
   return (
     <div className="flex flex-col gap-1">
@@ -53,15 +64,15 @@ export default function DrawingCanvas() {
       <div
         ref={containerRef}
         className={clsx(
-          "w-[700px] h-[400px] border-2 border-black overflow-hidden",
-          { "cursor-grab": mode === MODE.PAN }
+          "w-[700px] h-[400px] border-2 border-black overflow-hidden"
+          // mode === MODE.PAN ? "cursor-grab" : "cursor-default"
         )}
         onMouseEnter={mode === MODE.PAN ? handleMouseEnter : () => {}}
         onMouseDown={mode === MODE.PAN ? handleMouseDown : () => {}}
       >
         <div
           ref={pannerRef}
-          className="flex flex-col items-center justify-center bg-gray-300 w-[1000px] h-[1000px] overflow-hidden"
+          className="flex flex-col items-center justify-center bg-gray-300 w-[2000px] h-[2000px] overflow-hidden"
         >
           <div className="w-[400px] h-[300px] bg-white"></div>
         </div>
