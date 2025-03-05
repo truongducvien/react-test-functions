@@ -2,7 +2,7 @@
 import "./App.css";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import MUIThemeProvider from "./components/MUI-theme/MUIThemeProvider";
-import { Loading } from "./components/framer-motion";
+import DrawingCanvas from "./components/drawing-canvas";
 
 function App() {
   const queryClient = new QueryClient();
@@ -10,7 +10,7 @@ function App() {
   return (
     <MUIThemeProvider>
       <QueryClientProvider client={queryClient}>
-        <Loading />
+        <DrawingCanvas />
       </QueryClientProvider>
     </MUIThemeProvider>
   );
